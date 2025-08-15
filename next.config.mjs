@@ -12,6 +12,15 @@ const nextConfig = {
                 hostname: 'raw.githubusercontent.com',
                 pathname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'encrypted-tbn0.gstatic.com',
+                pathname: '**',
+            },
+        ],
+        domains: [
+            'i.imgur.com',
+            // Add your allowed domains here
         ],
     },
 };

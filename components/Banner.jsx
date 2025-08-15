@@ -1,38 +1,62 @@
-import React from "react";
-import { assets } from "@/assets/assets";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
+import house from '../assets/jaksa/house.png';
+import office from '../assets/jaksa/office.png';
+import plum from '../assets/jaksa/plum.png';
+
+const applications = [
+  {
+    image: house,
+    alt: 'Home automation',
+    desc: 'Home automation for comfort, security, and energy efficiency.',
+  },
+  {
+    image: office,
+    alt: 'Smart solutions',
+    desc: 'Smart solutions for efficient, connected offices.',
+  },
+  {
+    image: plum,
+    alt: 'Automation and monitoring',
+    desc: 'Automation and monitoring for hospitals, industries, and institutes to improve safety, efficiency, and control.',
+  },
+];
 
 const Banner = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between md:pl-20 py-14 md:py-0 bg-[#E6E9F2] my-16 rounded-xl overflow-hidden">
-      <Image
-        className="max-w-56"
-        src={assets.jbl_soundbox_image}
-        alt="jbl_soundbox_image"
-      />
-      <div className="flex flex-col items-center justify-center text-center space-y-2 px-4 md:px-0">
-        <h2 className="text-2xl md:text-3xl font-semibold max-w-[290px]">
-          Level Up Your Gaming Experience
+    <section className='w-full flex flex-col items-center pt-16 pb-14 bg-white'>
+      <div className='mb-10 text-center'>
+        <h2 className='text-3xl md:text-4xl font-bold text-[#1A3578] mb-3'>
+          Real-Life Applications
         </h2>
-        <p className="max-w-[343px] font-medium text-gray-800/60">
-          From immersive sound to precise controls—everything you need to win
+        <p className='text-[#4B6584] text-base md:text-lg max-w-2xl mx-auto mb-2 font-normal'>
+          Whether you’re upgrading your home security or automating your
+          lighting, Jaksa offers real-world solutions for everyday needs.
+          Discover how our technology enhances convenience, comfort, and peace
+          of mind.
         </p>
-        <button className="group flex items-center justify-center gap-1 px-12 py-2.5 bg-orange-600 rounded text-white">
-          Buy now
-          <Image className="group-hover:translate-x-1 transition" src={assets.arrow_icon_white} alt="arrow_icon_white" />
-        </button>
+        <div className='w-12 h-1 bg-[#A7B8D8] mx-auto rounded-full mt-2 mb-6'></div>
       </div>
-      <Image
-        className="hidden md:block max-w-80"
-        src={assets.md_controller_image}
-        alt="md_controller_image"
-      />
-      <Image
-        className="md:hidden"
-        src={assets.sm_controller_image}
-        alt="sm_controller_image"
-      />
-    </div>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl px-2'>
+        {applications.map((app, idx) => (
+          <div
+            key={idx}
+            className='flex flex-col items-center text-center bg-white rounded-2xl p-6 transition-all duration-300 shadow-none hover:shadow-lg hover:-translate-y-2 cursor-pointer'
+          >
+            <Image
+              src={app.image}
+              alt={app.alt}
+              width={180}
+              height={140}
+              className='mb-6 object-contain'
+            />
+            <p className='text-[#4B6584] text-base md:text-lg font-medium max-w-xs'>
+              {app.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
