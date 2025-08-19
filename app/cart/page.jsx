@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar';
 import { useAppContext } from '../../context/AppContext';
 
 import OrderSummary from '../../components/OrderSummary';
+import Footer from '../../components/Footer';
 
 const Cart = () => {
   const {
@@ -206,13 +207,21 @@ const Cart = () => {
                     <option value='afternoon'>Afternoon (12PM - 5PM)</option>
                     <option value='evening'>Evening (5PM - 9PM)</option>
                   </select>
-                  <input
-                    type='date'
-                    name='date'
-                    value={form.date}
+                  <select
+                    name='dayOfWeek'
+                    value={form.dayOfWeek || ''}
                     onChange={handleFormChange}
                     className='flex-1 border-2 border-[#A7B8D8] rounded-lg py-3 px-4 text-[#1A3578] bg-white focus:outline-none focus:border-[#1A3578] transition'
-                  />
+                  >
+                    <option value=''>Select Day</option>
+                    <option value='monday'>Monday</option>
+                    <option value='tuesday'>Tuesday</option>
+                    <option value='wednesday'>Wednesday</option>
+                    <option value='thursday'>Thursday</option>
+                    <option value='friday'>Friday</option>
+                    <option value='saturday'>Saturday</option>
+                    <option value='sunday'>Sunday</option>
+                  </select>
                 </div>
               </div>
               <button
@@ -226,6 +235,7 @@ const Cart = () => {
           </section>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

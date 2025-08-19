@@ -48,10 +48,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  href='/my-orders'
-                  className='hover:text-[#A7B8D8] transition'
-                >
+                <Link href='/cart' className='hover:text-[#A7B8D8] transition'>
                   Orders
                 </Link>
               </li>
