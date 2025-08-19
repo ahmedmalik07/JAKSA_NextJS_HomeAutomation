@@ -10,11 +10,12 @@ import Link from 'next/link';
 const PAGE_SIZE = 6;
 
 const AllProducts = () => {
-  const { products } = useAppContext();
+  const { products, addToCart } = useAppContext();
   const [page, setPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [addingToCart, setAddingToCart] = useState({});
 
   // Build category counts
   const categoryCount = {};
@@ -48,6 +49,25 @@ const AllProducts = () => {
   React.useEffect(() => {
     setPage(1);
   }, [selectedCategory]);
+
+  const handleAddToCart = async (e, productId) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setAddingToCart((prev) => ({ ...prev, [productId]: true }));
+
+    try {
+      addToCart(productId);
+
+      // Show success feedback
+      setTimeout(() => {
+        setAddingToCart((prev) => ({ ...prev, [productId]: false }));
+      }, 1000);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      setAddingToCart((prev) => ({ ...prev, [productId]: false }));
+    }
+  };
 
   return (
     <div className='min-h-screen flex flex-col bg-[#f7f9fc]'>
@@ -120,7 +140,7 @@ const AllProducts = () => {
               <Link
                 href={`/product/${product._id}`}
                 key={product._id}
-                className='group rounded-xl bg-white shadow hover:shadow-lg transition overflow-hidden flex flex-col cursor-pointer'
+                className='group rounded-xl bg-white shadow hover:shadow-lg transition overflow-hidden flex flex-col cursor-pointer relative'
               >
                 <div className='relative w-full aspect-square bg-[#f7f9fc] flex items-center justify-center'>
                   <img
@@ -128,6 +148,50 @@ const AllProducts = () => {
                     alt={product.name}
                     className='object-contain p-8 w-full h-full group-hover:scale-105 transition-transform duration-300'
                   />
+
+                  {/* Add to Cart Button */}
+                  <button
+                    onClick={(e) => handleAddToCart(e, product._id)}
+                    disabled={addingToCart[product._id]}
+                    className='absolute top-2 right-2 md:top-3 md:right-3 w-8 h-8 md:w-10 md:h-10 bg-white hover:bg-[#1A3578] text-[#1A3578] hover:text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group/btn z-10 border border-[#1A3578]/20'
+                    title='Add to Cart'
+                  >
+                    {addingToCart[product._id] ? (
+                      <svg
+                        className='w-3 h-3 md:w-4 md:h-4 animate-spin'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                      >
+                        <circle
+                          className='opacity-25'
+                          cx='12'
+                          cy='12'
+                          r='10'
+                          stroke='currentColor'
+                          strokeWidth='4'
+                        ></circle>
+                        <path
+                          className='opacity-75'
+                          fill='currentColor'
+                          d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                        ></path>
+                      </svg>
+                    ) : (
+                      <svg
+                        className='w-3 h-3 md:w-4 md:h-4 group-hover/btn:scale-110 transition-transform'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01'
+                        />
+                      </svg>
+                    )}
+                  </button>
                 </div>
                 <div className='p-4 flex-1 flex flex-col'>
                   <p className='text-[#1A3578] text-sm font-medium mb-2 line-clamp-2'>

@@ -47,40 +47,40 @@ const Transform = () => {
         </div>
 
         {/* Steps Row */}
-        <div className='flex flex-col lg:flex-row justify-center items-stretch gap-4 md:gap-6 w-full max-w-5xl mb-8 md:mb-12 px-2'>
+        <div className='flex flex-col md:flex-row justify-center items-stretch gap-6 w-full max-w-5xl mb-12 px-2'>
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className={`flex-1 bg-gradient-to-br from-white to-slate-50 rounded-[20px] md:rounded-[24px] shadow-[0_8px_32px_rgba(44,62,80,0.12)] p-6 md:p-8 flex flex-col items-center text-center 
+              className={`flex-1 bg-gradient-to-br from-white to-slate-50 rounded-[24px] shadow-[0_8px_32px_rgba(44,62,80,0.12)] p-8 flex flex-col items-center text-center 
                 transition-all duration-700 ease-out cursor-pointer group relative overflow-hidden 
-                hover:shadow-[0_20px_60px_rgba(26,53,120,0.25)] hover:scale-[1.03] lg:hover:scale-[1.08] hover:-translate-y-1 lg:hover:-translate-y-2
+                hover:shadow-[0_20px_60px_rgba(26,53,120,0.25)] hover:scale-[1.08] hover:-translate-y-2
                 border border-slate-100 hover:border-[#5A7BD8]/30`}
               style={{
                 minWidth: '240px',
-                minHeight: '140px',
+                minHeight: '160px',
                 animationDelay: `${idx * 0.15}s`,
               }}
               tabIndex={0}
               aria-label={step.title}
             >
               {/* Animated background gradient on hover */}
-              <div className='absolute inset-0 bg-gradient-to-br from-[#5A7BD8]/5 via-[#1A3578]/5 to-[#A7B8D8]/10 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-[20px] md:rounded-[24px]'></div>
+              <div className='absolute inset-0 bg-gradient-to-br from-[#5A7BD8]/5 via-[#1A3578]/5 to-[#A7B8D8]/10 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-[24px]'></div>
 
               {/* Floating orb effect */}
-              <div className='absolute top-3 right-3 md:top-4 md:right-4 w-8 h-8 md:w-12 md:h-12 bg-gradient-to-br from-[#5A7BD8]/20 to-[#1A3578]/20 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl'></div>
+              <div className='absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-[#5A7BD8]/20 to-[#1A3578]/20 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl'></div>
 
               <span
-                className='text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-br from-[#5A7BD8] to-[#1A3578] bg-clip-text text-transparent mb-3 md:mb-4 drop-shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-2xl relative z-10'
+                className='text-5xl md:text-6xl font-extrabold bg-gradient-to-br from-[#5A7BD8] to-[#1A3578] bg-clip-text text-transparent mb-4 drop-shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-2xl relative z-10'
                 style={{ letterSpacing: '2px' }}
               >
                 {step.number}
               </span>
 
-              <h3 className='text-base md:text-lg lg:text-xl font-bold text-[#1A3578] mb-2 md:mb-3 transition-all duration-500 group-hover:text-[#2d4aa3] group-hover:scale-105 relative z-10'>
+              <h3 className='text-lg md:text-xl font-bold text-[#1A3578] mb-3 transition-all duration-500 group-hover:text-[#2d4aa3] group-hover:scale-105 relative z-10'>
                 {step.title}
               </h3>
 
-              <p className='text-[#4B6584] text-xs md:text-sm lg:text-base leading-relaxed font-normal transition-all duration-500 group-hover:text-[#2d3748] group-hover:scale-[1.02] relative z-10'>
+              <p className='text-[#4B6584] text-sm md:text-base leading-relaxed font-normal transition-all duration-500 group-hover:text-[#2d3748] group-hover:scale-[1.02] relative z-10'>
                 {step.desc}
               </p>
 
@@ -91,9 +91,9 @@ const Transform = () => {
         </div>
 
         {/* Lower Section (two-panel composition) */}
-        <div className='relative grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6 md:gap-8 w-full max-w-6xl mt-4 px-2 items-center'>
+        <div className='relative grid grid-cols-1 md:grid-cols-[1.05fr_1fr] gap-8 w-full max-w-6xl mt-4 px-2 items-center'>
           {/* Left photo card with enhanced effects */}
-          <div className='relative rounded-[20px] md:rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(26,53,120,0.25)] group cursor-pointer transition-all duration-700 hover:scale-[1.01] md:hover:scale-[1.02] hover:shadow-[0_30px_80px_rgba(26,53,120,0.35)]'>
+          <div className='relative rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(26,53,120,0.25)] group cursor-pointer transition-all duration-700 hover:scale-[1.02] hover:shadow-[0_30px_80px_rgba(26,53,120,0.35)]'>
             <Image
               src={auto}
               alt='Smart devices on a table'
@@ -103,13 +103,13 @@ const Transform = () => {
             <div className='absolute inset-0 bg-gradient-to-br from-[#0b1a3a]/60 via-[#1A3578]/40 to-[#5A7BD8]/30 transition-all duration-700 group-hover:from-[#0b1a3a]/50 group-hover:via-[#1A3578]/30 group-hover:to-[#5A7BD8]/20' />
 
             {/* Floating elements */}
-            <div className='absolute top-4 md:top-6 left-4 md:left-6 w-2 h-2 md:w-3 md:h-3 bg-white/30 rounded-full animate-pulse'></div>
+            <div className='absolute top-6 left-6 w-3 h-3 bg-white/30 rounded-full animate-pulse'></div>
             <div
-              className='absolute top-8 md:top-12 right-6 md:right-8 w-1.5 h-1.5 md:w-2 md:h-2 bg-[#A7B8D8]/50 rounded-full animate-pulse'
+              className='absolute top-12 right-8 w-2 h-2 bg-[#A7B8D8]/50 rounded-full animate-pulse'
               style={{ animationDelay: '0.5s' }}
             ></div>
             <div
-              className='absolute bottom-6 md:bottom-8 left-6 md:left-8 w-3 h-3 md:w-4 md:h-4 bg-[#5A7BD8]/40 rounded-full animate-pulse'
+              className='absolute bottom-8 left-8 w-4 h-4 bg-[#5A7BD8]/40 rounded-full animate-pulse'
               style={{ animationDelay: '1s' }}
             ></div>
           </div>
@@ -117,11 +117,11 @@ const Transform = () => {
           {/* Right enhanced panel */}
           <div className='relative'>
             {/* Multiple layered backgrounds for depth */}
-            <div className='absolute -inset-x-4 md:-inset-x-6 -inset-y-6 md:-inset-y-8 lg:-inset-y-10 rounded-[24px] md:rounded-[32px] bg-gradient-to-br from-[#F8FAFC] via-[#F1F5F9] to-[#E2E8F0] shadow-[0_15px_45px_rgba(26,53,120,0.12)] rotate-0 lg:rotate-1 transition-transform duration-700 hover:rotate-1 lg:hover:rotate-2' />
-            <div className='absolute -inset-x-2 md:-inset-x-4 -inset-y-4 md:-inset-y-6 lg:-inset-y-8 rounded-[20px] md:rounded-[28px] bg-gradient-to-br from-white/80 to-[#F8FAFC]/80 shadow-[0_10px_30px_rgba(26,53,120,0.08)] rotate-0 lg:rotate-[0.5deg] transition-transform duration-700 hover:rotate-[0.5deg] lg:hover:rotate-1' />
+            <div className='absolute -inset-x-6 -inset-y-8 md:-inset-y-10 rounded-[32px] bg-gradient-to-br from-[#F8FAFC] via-[#F1F5F9] to-[#E2E8F0] shadow-[0_15px_45px_rgba(26,53,120,0.12)] rotate-0 md:rotate-1 transition-transform duration-700 hover:rotate-2' />
+            <div className='absolute -inset-x-4 -inset-y-6 md:-inset-y-8 rounded-[28px] bg-gradient-to-br from-white/80 to-[#F8FAFC]/80 shadow-[0_10px_30px_rgba(26,53,120,0.08)] rotate-0 md:rotate-[0.5deg] transition-transform duration-700 hover:rotate-1' />
 
-            <div className='relative p-6 md:p-8 lg:p-12 group cursor-pointer'>
-              <h3 className='text-2xl md:text-3xl lg:text-5xl font-extrabold bg-gradient-to-br from-[#1A3578] via-[#2d4aa3] to-[#5A7BD8] bg-clip-text text-transparent leading-tight mb-4 md:mb-6 transition-all duration-500 group-hover:scale-[1.01] md:group-hover:scale-[1.02]'>
+            <div className='relative p-8 md:p-12 group cursor-pointer'>
+              <h3 className='text-3xl md:text-5xl font-extrabold bg-gradient-to-br from-[#1A3578] via-[#2d4aa3] to-[#5A7BD8] bg-clip-text text-transparent leading-tight mb-6 transition-all duration-500 group-hover:scale-[1.02]'>
                 We Are Experts
                 <br />
                 <span className='bg-gradient-to-r from-[#5A7BD8] to-[#A7B8D8] bg-clip-text text-transparent'>
@@ -129,7 +129,7 @@ const Transform = () => {
                 </span>
               </h3>
 
-              <p className='text-[#4B6584] text-sm md:text-base lg:text-lg max-w-xl leading-relaxed transition-all duration-500 group-hover:text-[#2d3748] group-hover:scale-[1.005] md:group-hover:scale-[1.01]'>
+              <p className='text-[#4B6584] text-base md:text-lg max-w-xl leading-relaxed transition-all duration-500 group-hover:text-[#2d3748] group-hover:scale-[1.01]'>
                 At Jaksa, we're a team of innovators, engineers, and dreamers
                 transforming everyday homes into smart living spaces. With a
                 passion for seamless automation and intuitive design, we make
@@ -137,8 +137,8 @@ const Transform = () => {
               </p>
 
               {/* Decorative elements */}
-              <div className='absolute top-3 right-3 md:top-4 md:right-4 w-4 h-4 md:w-6 md:h-6 bg-gradient-to-br from-[#5A7BD8]/20 to-[#1A3578]/20 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-500'></div>
-              <div className='absolute bottom-3 left-3 md:bottom-4 md:left-4 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-br from-[#A7B8D8]/30 to-[#5A7BD8]/30 rounded-full opacity-40 group-hover:opacity-70 transition-opacity duration-500'></div>
+              <div className='absolute top-4 right-4 w-6 h-6 bg-gradient-to-br from-[#5A7BD8]/20 to-[#1A3578]/20 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-500'></div>
+              <div className='absolute bottom-4 left-4 w-4 h-4 bg-gradient-to-br from-[#A7B8D8]/30 to-[#5A7BD8]/30 rounded-full opacity-40 group-hover:opacity-70 transition-opacity duration-500'></div>
             </div>
           </div>
         </div>

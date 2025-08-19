@@ -24,7 +24,7 @@ const Cart = () => {
     email: '',
     contact: '',
     time: '',
-    date: '',
+    dayOfWeek: '',
   });
   const [submitting, setSubmitting] = React.useState(false);
   // Calculate subtotal
@@ -37,13 +37,62 @@ const Cart = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
   // Handle form submit
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: 'Cart Contact Request',
+          message: `Contact Details:
+Phone: ${form.contact}
+Preferred Time: ${form.time}
+Preferred Day: ${form.dayOfWeek}
+
+Cart Items:
+${Object.keys(cartItems)
+  .map((itemId) => {
+    const product = products.find((p) => p._id === itemId);
+    return product
+      ? `- ${product.name} (Qty: ${cartItems[itemId]}) - Rs. ${
+          product.offerPrice || product.price
+        }`
+      : '';
+  })
+  .filter(Boolean)
+  .join('\n')}
+
+Total: Rs. ${subtotal}`,
+        }),
+      });
+
+      if (response.ok) {
+        alert(
+          'Contact request submitted successfully! We will reach out to you soon.'
+        );
+        setForm({
+          name: '',
+          email: '',
+          contact: '',
+          time: '',
+          dayOfWeek: '',
+        });
+      } else {
+        alert('Failed to submit contact request. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred. Please try again.');
+    } finally {
       setSubmitting(false);
-      alert('Submitted!');
-    }, 1200);
+    }
   }
   return (
     <>
@@ -195,12 +244,12 @@ const Cart = () => {
                 <label className='block text-sm text-[#4B6584] mb-2'>
                   When to contact you? (optional)
                 </label>
-                <div className='flex gap-3'>
+                <div className='flex flex-col sm:flex-row gap-3'>
                   <select
                     name='time'
                     value={form.time}
                     onChange={handleFormChange}
-                    className='flex-1 border-2 border-[#A7B8D8] rounded-lg py-3 px-4 text-[#1A3578] bg-white focus:outline-none focus:border-[#1A3578] transition'
+                    className='flex-1 border-2 border-[#A7B8D8] rounded-lg py-2 px-3 md:py-3 md:px-4 text-[#1A3578] bg-white focus:outline-none focus:border-[#1A3578] transition text-sm md:text-base'
                   >
                     <option value=''>Select Time</option>
                     <option value='morning'>Morning (9AM - 12PM)</option>
@@ -211,7 +260,7 @@ const Cart = () => {
                     name='dayOfWeek'
                     value={form.dayOfWeek || ''}
                     onChange={handleFormChange}
-                    className='flex-1 border-2 border-[#A7B8D8] rounded-lg py-3 px-4 text-[#1A3578] bg-white focus:outline-none focus:border-[#1A3578] transition'
+                    className='flex-1 border-2 border-[#A7B8D8] rounded-lg py-2 px-3 md:py-3 md:px-4 text-[#1A3578] bg-white focus:outline-none focus:border-[#1A3578] transition text-sm md:text-base'
                   >
                     <option value=''>Select Day</option>
                     <option value='monday'>Monday</option>
@@ -227,7 +276,7 @@ const Cart = () => {
               <button
                 type='submit'
                 disabled={submitting}
-                className='mt-4 w-full px-6 py-4 bg-[#1A3578] text-white rounded-lg shadow-lg hover:bg-[#25335a] disabled:bg-gray-400 transition font-semibold text-lg'
+                className='mt-4 w-full px-4 py-3 md:px-6 md:py-4 bg-[#1A3578] text-white rounded-lg shadow-lg hover:bg-[#25335a] disabled:bg-gray-400 transition font-semibold text-base md:text-lg'
               >
                 {submitting ? 'Submitting...' : 'Submit'}
               </button>
