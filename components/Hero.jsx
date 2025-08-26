@@ -87,7 +87,7 @@ const Hero = () => {
           </div>
 
           {/* Desktop floating accessory cards (overlapping bottom) */}
-          <div className='hidden md:flex absolute left-1/2 -translate-x-1/2 -bottom-20 gap-6 z-20'>
+          <div className='hidden md:flex absolute left-1/2 -translate-x-1/2 -bottom-20 gap-6 z-20 opacity-80'>
             {[
               {
                 img: cameraImg,
@@ -145,7 +145,7 @@ const Hero = () => {
       </div>
 
       {/* Mobile accessory cards (stack below) */}
-      <div className='md:hidden grid grid-cols-1 sm:grid-cols-3 gap-3 px-2 w-full max-w-[1100px] mt-6'>
+      <div className='md:hidden  grid grid-cols-1 sm:grid-cols-3 gap-3 px-2 w-full max-w-[1100px] mt-6 bg-gradient-to-br from-white to-custom-dark shadow-inner'>
         {[
           {
             img: cameraImg,
