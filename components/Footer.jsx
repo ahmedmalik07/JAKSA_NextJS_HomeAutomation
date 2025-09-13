@@ -18,19 +18,30 @@ const Footer = () => {
     setMessage('');
 
     try {
-      const response = await fetch('/api/newsletter', {
+      const response = await fetch('/api/gs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          type: 'newsletter',
+          payload: {
+            email,
+            page: 'Footer',
+            url: typeof window !== 'undefined' ? window.location.href : '',
+            userAgent:
+              typeof navigator !== 'undefined' ? navigator.userAgent : '',
+          },
+        }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.ok) {
         setMessage('Successfully subscribed to newsletter!');
         setEmail('');
       } else {
-        setMessage('Failed to subscribe. Please try again.');
+        setMessage(result.error || 'Failed to subscribe. Please try again.');
       }
     } catch (error) {
       setMessage('An error occurred. Please try again.');
@@ -104,11 +115,11 @@ const Footer = () => {
             <ul className='space-y-3 text-sm'>
               <li className='flex items-center gap-2'>
                 <Image src={fbIcon} alt='Phone' width={18} height={18} />
-                <span>+1012 3456 789</span>
+                <span>+92-332-1052572</span>
               </li>
               <li className='flex items-center gap-2'>
                 <Image src={instaIcon} alt='Email' width={18} height={18} />
-                <span className='break-all'>demo@gmail.com</span>
+                <span className='break-all'>jaksa.connect@gmail.com</span>
               </li>
               <li className='flex items-start gap-2'>
                 <Image
@@ -119,7 +130,7 @@ const Footer = () => {
                   className='mt-0.5 flex-shrink-0'
                 />
                 <span className='leading-relaxed'>
-                  132 Dartmouth Street Boston, Massachusetts 02156 United States
+                  AUBIC, FMC 5th Floor, E9 Islamabad.
                 </span>
               </li>
             </ul>

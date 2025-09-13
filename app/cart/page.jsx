@@ -4,6 +4,7 @@ import { assets } from '../../assets/assets';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import { useAppContext } from '../../context/AppContext';
+import SCRIPT_URL from '../../utils/google-script.js';
 
 import OrderSummary from '../../components/OrderSummary';
 import Footer from '../../components/Footer';
@@ -42,38 +43,41 @@ const Cart = () => {
     setSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
+      const cartDetails = Object.keys(cartItems)
+        .map((itemId) => {
+          const product = products.find((p) => p._id === itemId);
+          return product
+            ? {
+                name: product.name,
+                quantity: cartItems[itemId],
+                price: product.offerPrice || product.price,
+              }
+            : null;
+        })
+        .filter(Boolean);
+
+      const response = await fetch('/api/gs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          subject: 'Cart Contact Request',
-          message: `Contact Details:
-Phone: ${form.contact}
-Preferred Time: ${form.time}
-Preferred Day: ${form.dayOfWeek}
-
-Cart Items:
-${Object.keys(cartItems)
-  .map((itemId) => {
-    const product = products.find((p) => p._id === itemId);
-    return product
-      ? `- ${product.name} (Qty: ${cartItems[itemId]}) - Rs. ${
-          product.offerPrice || product.price
-        }`
-      : '';
-  })
-  .filter(Boolean)
-  .join('\n')}
-
-Total: Rs. ${subtotal}`,
+          type: 'order',
+          payload: {
+            ...form,
+            cart: cartDetails,
+            total: subtotal,
+            page: 'Cart Page',
+            url: typeof window !== 'undefined' ? window.location.href : '',
+            userAgent:
+              typeof navigator !== 'undefined' ? navigator.userAgent : '',
+          },
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.ok) {
         alert(
           'Contact request submitted successfully! We will reach out to you soon.'
         );
@@ -85,11 +89,13 @@ Total: Rs. ${subtotal}`,
           dayOfWeek: '',
         });
       } else {
-        alert('Failed to submit contact request. Please try again.');
+        throw new Error(
+          result.error || 'Failed to submit contact request. Please try again.'
+        );
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('An error occurred. Please try again.');
+      alert(error.message || 'An error occurred. Please try again.');
     } finally {
       setSubmitting(false);
     }

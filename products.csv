@@ -1,0 +1,11 @@
+name,category,description,price,offerPrice,image
+Smart Bulb,Lighting,WiFi-enabled LED bulb,1200,999,https://example.com/bulb.jpg
+Smart Switch,Switches,Remote control switch,1500,1299,https://example.com/switch.jpg
+Smart Plug,Plugs,Energy monitoring plug,1800,1499,https://example.com/plug.jpg
+Smart Camera,Security,HD indoor camera,3500,2999,https://example.com/camera.jpg
+Smart Door Lock,Security,Keyless entry lock,7000,5999,https://example.com/lock.jpg
+Smart Thermostat,Climate,Programmable thermostat,5000,4499,https://example.com/thermostat.jpg
+Smart Sensor,Sensors,Motion and temp sensor,900,799,https://example.com/sensor.jpg
+Smart Speaker,Audio,Voice assistant speaker,4000,3499,https://example.com/speaker.jpg
+Smart Curtain,Automation,Remote curtain motor,8000,6999,https://example.com/curtain.jpg
+Smart IR Blaster,Remote,Universal remote device,2200,1999,https://example.com/irblaster.jpg
