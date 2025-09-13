@@ -124,7 +124,7 @@ const Contact = () => {
                     <Image src={callIcon} alt='Call' width={22} height={22} />
                   </span>
                   <span className='text-[#e6eaf3] text-base'>
-                    +92-332-1052572 (Jaksa)
+                    +92-319-3608483 (Jaksa)
                   </span>
                 </div>
                 <div className='flex items-center gap-3'>

@@ -115,11 +115,11 @@ const Footer = () => {
             <ul className='space-y-3 text-sm'>
               <li className='flex items-center gap-2'>
                 <Image src={fbIcon} alt='Phone' width={18} height={18} />
-                <span>+92-332-1052572</span>
+                <span>+92-319-3608483</span>
               </li>
               <li className='flex items-center gap-2'>
                 <Image src={instaIcon} alt='Email' width={18} height={18} />
-                <span className='break-all'>jaksa.connect@gmail.com</span>
+                <span className='break-all'>ahmed.usman7615@gmail.com</span>
               </li>
               <li className='flex items-start gap-2'>
                 <Image
